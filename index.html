@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ZimAutoTrader.com - Zimbabwe's #1 Vehicle & Machinery Marketplace. Buy and sell vehicles, farming machinery, mining equipment, and spare parts in Zimbabwe.">
+    <meta name="keywords" content="Zimbabwe, cars, vehicles, machinery, equipment, parts, auto trader, classifieds, Harare, Bulawayo">
+    <meta name="author" content="ZimAutoTrader">
+    <meta property="og:title" content="ZimAutoTrader.com - Zimbabwe's Vehicle Marketplace">
+    <meta property="og:description" content="Buy and sell vehicles, machinery, and parts in Zimbabwe.">
+    <meta property="og:type" content="website">
+    <title>ZimAutoTrader.com - Zimbabwe's Premium Vehicle & Machinery Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇿🇼</text></svg>">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>
+                        🇿🇼 ZimAutoTrader.com
+                        <small>.com</small>
+                    </h1>
+                    <span>Zimbabwe's #1 Vehicle & Machinery Marketplace</span>
+                </div>
+                
+                <div class="search-section">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by keyword...">
+                    </div>
+                </div>
+                
+                <div class="user-section" id="userSection">
+                    <!-- Dynamic -->
+                </div>
+            </div>
+            
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="marketplace">
+                    <i class="fas fa-store"></i> Marketplace
+                </button>
+                <button class="nav-tab" data-tab="cart">
+                    <i class="fas fa-shopping-cart"></i> Cart
+                    <span class="cart-count" id="cartCountBadge">0</span>
+                </button>
+                <button class="nav-tab" data-tab="profile">
+                    <i class="fas fa-user"></i> My Profile
+                </button>
+                <button class="nav-tab" data-tab="specialists">
+                    <i class="fas fa-tools"></i> Specialists & Services
+                </button>
+                <button class="nav-tab" data-tab="subscriptions">
+                    <i class="fas fa-crown"></i> Upgrade Plan
+                </button>
+                <button class="nav-tab" data-tab="analytics" id="analyticsTab" style="display:none;">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </button>
+            </div>
+        </div>
+
+        <!-- Dynamic Content Container -->
+        <div id="dynamicContent">
+            <!-- Content loaded by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Post Ad Modal -->
+    <div class="modal" id="postAdModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Post Your Ad on ZimAutoTrader.com</h2>
+                <button class="close-btn" data-close="postAdModal">&times;</button>
+            </div>
+            <form id="postAdForm">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="adCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Vehicles">🚗 Vehicles</option>
+                        <option value="Machinery">🚜 Farming Machinery</option>
+                        <option value="Equipment">🏗️ Mining & Construction</option>
+                        <option value="Parts">🔧 Spare Parts</option>
+                    </select>
+                </div>
+                <div class="form-group" id="makeFieldGroup" style="display:none;">
+                    <label>Vehicle Make</label>
+                    <select id="adMake">
+                        <option value="">Select Make</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="adTitle" placeholder="e.g., Toyota Hilux 2020" required>
+                </div>
+                <div class="form-group">
+                    <label>Price (USD)</label>
+                    <input type="number" id="adPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <select id="adLocation" required>
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="adDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="adWhatsapp" placeholder="+263 7X XXX XXXX" required>
+                </div>
+                <div class="form-group">
+                    <label>Status</label>
+                    <select id="adStatus">
+                        <option value="available">Available</option>
+                        <option value="sold">Sold</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Post Advertisement</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Listing Detail Modal -->
+    <div class="modal" id="listingDetailModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Listing Details</h2>
+                <button class="close-btn" data-close="listingDetailModal">&times;</button>
+            </div>
+            <div id="listingDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Quotation Modal -->
+    <div class="modal" id="quotationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-invoice"></i> Request Quotation</h2>
+                <button class="close-btn" data-close="quotationModal">&times;</button>
+            </div>
+            <div id="quotationContent"></div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Login to ZimAutoTrader.com</h2>
+                <button class="close-btn" data-close="authModal">&times;</button>
+            </div>
+            <form id="authForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="authEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="authPassword" required>
+                </div>
+                <div class="form-group" id="registerNameGroup" style="display:none;">
+                    <label>Full Name / Company Name</label>
+                    <input type="text" id="authName">
+                </div>
+                <div class="form-group" id="profileTypeGroup" style="display:none;">
+                    <label>Account Type</label>
+                    <div class="profile-type-selector">
+                        <div class="profile-type-option" data-type="individual" id="individualOption">
+                            <i class="fas fa-user"></i>
+                            <h4>Individual</h4>
+                            <small>Private seller</small>
+                        </div>
+                        <div class="profile-type-option" data-type="company" id="companyOption">
+                            <i class="fas fa-building"></i>
+                            <h4>Company</h4>
+                            <small>Business/Dealer</small>
+                        </div>
+                    </div>
+                    <input type="hidden" id="authProfileType" value="individual">
+                </div>
+                <div class="form-group" id="companyDetailsGroup" style="display:none;">
+                    <label>Company Registration Number (Optional)</label>
+                    <input type="text" id="authRegNumber">
+                    <label style="margin-top: 1rem;">Company Address</label>
+                    <input type="text" id="authAddress">
+                </div>
+                <button type="submit" class="submit-btn" id="authSubmitBtn">Login</button>
+            </form>
+            <div class="switch-form">
+                <span id="switchText">Don't have an account?</span>
+                <a id="switchLink" class="switch-link">Register</a>
+            </div>
+            <div class="trial-offer-banner">
+                <i class="fas fa-gift"></i> All plans include a 7-day free trial!
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
